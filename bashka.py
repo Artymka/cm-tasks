@@ -8,10 +8,10 @@ def get_vfs_name():
 if __name__ == "__main__":
     vfs_name = get_vfs_name()
     # после ошибки в приглашении к вводу будет крестик
-    success_symbol = ":)"
-    failure_symbol = ":("
-    # success_symbol = "✔️"
-    # failure_symbol = "❌"
+    # success_symbol = ":)"
+    # failure_symbol = ":("
+    success_symbol = "✓"
+    failure_symbol = "✗"
     status_symbol = success_symbol
     success = True
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
         else:
             status_symbol = failure_symbol
 
-        inp = input(f"[ {vfs_name} ] {status_symbol} >")
+        inp = input(f"[ {vfs_name} ] {status_symbol} > ")
         parts = inp.split()
         if not parts:
             continue
