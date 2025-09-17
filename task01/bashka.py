@@ -1,12 +1,13 @@
 import psutil
 import sys
+from typing import Tuple, Generator, Callable
 
 
-def get_vfs_name():
+def get_vfs_name() -> str:
     """Возвращает тип файловой системы первого диска."""
     return psutil.disk_partitions()[0].fstype
 
-def simple_cmd_logic(cmd, args):
+def simple_cmd_logic(cmd: str, args: list[str]) -> Tuple[bool, str]:
     """Тестовая проверка аргументов команды и вывод."""
     for arg in args:
         if arg[0] != "-":
@@ -14,7 +15,7 @@ def simple_cmd_logic(cmd, args):
                                 
     return True, f"{cmd} {args}\n"
 
-def exec(cmd, args):
+def exec(cmd: str, args: list[str]) -> Tuple[bool, str]:
     """Выполняет команду и выводит результат."""
     match cmd:
         case "ls":
@@ -30,7 +31,10 @@ def exec(cmd, args):
             return False, "command not found\n"
 
 
-def serve(inp_gen, out_func, vfs_path, show_input=False):
+def serve(inp_gen: Generator[str],
+          out_func: Callable[[str], None],
+          vfs_path: str,
+          show_input: bool = False) -> None:
     """Запускает выполнение команд, посутпающих из генератора inp_gen, выводя результат в out_func."""
     # vfs_name = get_vfs_name()
     success_symbol = "✓"
@@ -55,21 +59,21 @@ def serve(inp_gen, out_func, vfs_path, show_input=False):
         success, res = exec(cmd, args)
         out_func(res)
 
-def script_input(script_path):
+def script_input(script_path: str) -> Generator[str]:
     """Генерирует строки ввода, читая из из файла скрипта."""
     with open(script_path) as fin:
         for ln in fin.readlines():
             yield ln
     yield "exit"
 
-def std_output(s):
+def std_output(s: str) -> None:
     """Обычный print, только с одинм параметром и без переноса строки."""
     print(s, end="")
 
 
 def main():
     # print(sys.argv)
-    path = sys.argv[0]
+    # path = sys.argv[0]
     work_dir = sys.argv[1]
     script_path = sys.argv[2]
 
