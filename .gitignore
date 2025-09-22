@@ -1,3 +1,4 @@
 .venv
 task.pdf
 questions.txt
+__pycache__
