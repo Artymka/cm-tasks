@@ -2,6 +2,11 @@ import psutil
 import sys
 from typing import Tuple, Generator, Callable
 
+from vfs import *
+
+
+# глобальный словарь с vfs
+vfs = {}
 
 def get_vfs_name() -> str:
     """Возвращает тип файловой системы первого диска."""
@@ -23,6 +28,12 @@ def exec(cmd: str, args: list[str]) -> Tuple[bool, str]:
         
         case "cd":
             return simple_cmd_logic(cmd, args)
+        
+        case "vfs-info":
+            return True, get_vfs_info(vfs)
+        
+        case "vfs-structure":
+            return True, get_vfs_structure(vfs)
 
         case "exit":
             exit(0)
@@ -35,8 +46,15 @@ def serve(inp_gen: Generator[str],
           out_func: Callable[[str], None],
           vfs_path: str,
           show_input: bool = False) -> None:
-    """Запускает выполнение команд, посутпающих из генератора inp_gen, выводя результат в out_func."""
-    # vfs_name = get_vfs_name()
+    """Запускает выполнение команд, посутпающих из генератора inp_gen, выводя результат через out_func."""
+    # загрузка vfs
+    try:
+        global vfs
+        vfs = read_vfs_form_xml(vfs_path)
+    except Exception as e:
+        out_func(f"Error while reading xml: {e}\n")
+        exit(1)
+
     success_symbol = "✓"
     failure_symbol = "✗"
     status_symbol = success_symbol
@@ -74,10 +92,10 @@ def std_output(s: str) -> None:
 def main():
     # print(sys.argv)
     # path = sys.argv[0]
-    work_dir = sys.argv[1]
+    vfs_path = sys.argv[1]
     script_path = sys.argv[2]
 
-    serve(script_input(script_path), std_output, work_dir, True)
+    serve(script_input(script_path), std_output, vfs_path, True)
             
 
 if __name__ == "__main__":
