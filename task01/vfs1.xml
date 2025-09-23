@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root name="root-dir">
+    <file name="text.txt" content="abc"></file>
+    <dir name="src">
+        <file name="index.html" content="&lt;p&gt;smth&lt;/p&gt;"></file>
+        <file name="style.css" content="body {overflow: hidden;}"></file>
+        <dir name="scripts">
+            <file name="script1.js" content="alert('Hello ...');"></file>
+            <file name="script2.js" content="alert('... World');"></file>
+        </dir>
+    </dir>
+</root>

@@ -49,15 +49,15 @@ def get_vfs_structure(vfs_dict: Dict) -> str:
     res = ''
     tab_size = 3
     offset = [0]
-    queue = [vfs_dict]
-    while len(queue):
-        curr = queue.pop(0)
-        tabs = offset.pop(0)
+    stack = [vfs_dict]
+    while len(stack):
+        curr = stack.pop()
+        tabs = offset.pop()
 
         res += ' ' * tabs * tab_size + curr['name'] + '\n'
         for child in curr['children']:
             if child['type'] == 'dir':
-                queue.append(child)
+                stack.append(child)
                 offset.append(tabs+1)
             else:
                 res += ' ' * (tabs+1) * tab_size + child['name'] + ': ' + child['content'] + '\n'
