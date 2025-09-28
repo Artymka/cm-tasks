@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root name="root-dir">
+    <file name="text.txt" content="abc"></file>
+    <dir name="src">
+        <dir name="html">
+            <file name="index.html" content="&lt;p&gt;smth&lt;/p&gt;"></file>
+        </dir>
+        <dir name="raw css">
+            <file name="style.css" content="body {overflow: hidden;}"></file>
+        </dir>
+        <dir name="native js">
+            <file name="script1.js" content="alert('Hello ...');"></file>
+            <file name="script2.js" content="alert('... World');"></file>
+        </dir>
+    </dir>
+    <dir name="build">
+        <dir name="smth with spaces">
+            <dir name="smth2">
+                <dir name="bin">
+                    <file name="1.exe" content="01010"></file>
+                    <file name="2.exe" content="10101"></file>
+                </dir>
+            </dir>
+        </dir>
+    </dir>
+</root>
