@@ -1,3 +1,4 @@
+for vfs2.xml
 cd text.txt
 cd /
 cd /..

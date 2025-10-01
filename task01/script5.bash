@@ -1,4 +1,4 @@
-some useless text
+for vfs5.xml
 and more
 vfs-info
 clear
