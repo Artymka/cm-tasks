@@ -10,12 +10,14 @@ class Node:
                  name: str,
                  type: str,
                  parent: Node = None,
-                 content: str = ""):
+                 content: str = "",
+                 owner: str = ""):
         self.name = name
         self.type = type
         self.parent = parent
         self.content = content
         self.children = []
+        self.owner = owner
 
     def add_child(self, node: Node) -> None:
         self.children.append(node)
@@ -25,6 +27,9 @@ class Node:
             if child.name == name:
                 return child
         return None
+    
+    def set_owner(self, owner: str):
+        self.owner = owner
 
     @classmethod
     def read_vfs_form_xml(cls, vfs_path: str) -> Node:

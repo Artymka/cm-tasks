@@ -8,6 +8,8 @@ from vfs import Node
 from cd import cd_logic
 from ls import ls_logic
 from whoami import whoami_logic
+from mkdir import mkdir_logic
+from chown import chown_logic
 
 
 # """
@@ -52,6 +54,12 @@ def exec(cmd: str, args: list[str], g: Dict) -> Tuple[bool, str]:
         
         case "clear":
             return True, "clear"
+        
+        case "mkdir":
+            return mkdir_logic(args, g)
+        
+        case "chown":
+            return chown_logic(args, g)
 
         case "exit":
             exit(0)
