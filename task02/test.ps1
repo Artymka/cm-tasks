@@ -1,17 +1,18 @@
 cd ./task02
 Set-PSDebug -Trace 1
-# $DebugPreference = "Continue"
 
-py .\main.py
+# не указаны нужные параметры
+py .\main.py -n "net"
 
-py .\main.py --help
+# неудачное чтение локального репозитория
+py .\main.py -r "neverhood"
 
-py .\main.py -n smth -r smth -v 0.0.1
+# неудачный поиск в интернете
+py .\main.py -n "net" -v "neverhood"
+py .\main.py -n "neverhood" -v "1.1.1"
 
-py .\main.py -n smth -r smth -v 123 -a
+# удачное чтение локального репозитория
+py .\main.py -r ".\test_repo\clap-master"
 
-py .\main.py -n smth -r smth -v 123 -a extra
-
-py .\main.py --n "my repo" -r smth -v 1.0.1 -mode unusual
-
-py .\main.py --name "my repo" --repo "my path" --version 1.0.1 --mode unusual
+# удачное чтение репозитория из интернета
+py .\main.py -n "net" -v "0.0.2"
